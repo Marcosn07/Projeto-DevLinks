@@ -1,0 +1,203 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --text-color: white;
+  --bg-url: url(./assets/bg-mobile.jpg);
+  --stroke-color: rgba(255, 255, 255, 0.5);
+  --surface-color: rgba(255, 255, 255, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --highlight-color: rgba(255, 255, 255, 0.2);
+  --switch-bg-url: url(./assets/moon-star.svg);
+}
+
+.light {
+  --text-color: black;
+  --bg-url: url(./assets/bg-mobile-light.jpg);
+  --stroke-color: rgba(0, 0, 0, 0.5);
+  --surface-color: rgba(0, 0, 0, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --highlight-color: rgba(0, 0, 0, 0.1);
+  --switch-bg-url: url(./assets/sun.svg);
+}
+
+body {
+  /*
+  background-image: url(./assets/bg-mobile.jpg);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+*/
+
+  background: var(--bg-url) no-repeat top center/cover;
+  height: 100vh;
+  /* Essa é uma forma de "atalho", onde todas as propriedades foram agrupadas em uma só */
+}
+
+body * {
+  /* o asterísco "*" indica que o comando vai ser aplicado a todos os elementos dentro do body */
+  font-family: "Inter", sans-serif;
+  color: var(--text-color);
+}
+
+#container {
+  width: 100%;
+  max-width: 588px;
+  margin: 56px auto 0px;
+  padding: 0 24px;
+
+  /* estilo da caixa de conteúdo do avatar e nome */
+}
+
+/* profile */
+
+#profile {
+  text-align: center;
+  padding: 24px;
+}
+/* Essa é uma forma de alinhar a imagem no centro, utilizando o elemento pai com text-align. Isso pode ser utilizado em elementos que são inline por padrão, sem a necessidade de margin: auto; Em elementos block não surtirá efeito. */
+
+#profile img {
+  width: 112px;
+  /* display: block; 
+  margin: auto; 
+  o display block e o margin auto são formas de alinhar a imagem sem a utilização do text-align no elemento pai #profile */
+}
+
+#profile p {
+  font-weight: 500;
+  line-height: 24px;
+  margin-top: 8px;
+}
+
+/* switch */
+
+#switch {
+  position: relative;
+  width: 64px;
+  /* Essa propriedade determina o tamanho da ''caixa'', para que possa posicionar o botão dentro do espaço desejado, para que ele não ande por toda linha */
+  margin: 4px auto; /* uma forma de alinhar display block, onde top e bottom pode ser qualquer valor, mas as laterais auto */
+}
+
+#switch button {
+  width: 32px;
+  height: 32px;
+  background: white var(--switch-bg-url) no-repeat center; /* foi coloada a url no background para não duplicar a imagem. No-repeat para ficar apenas uma imagem e center para centralizar */
+  border: 0;
+  border-radius: 50%;
+  position: absolute; /*posição absoluta, onde fica um elemento em cima do outro */
+  left: 0;
+  z-index: 1; /* determina a profundidade de um elemento para que possa sobrepor */
+  transform: translateY(-50%);
+  top: 50%;
+  animation: slide-back 0.4s;
+}
+
+.light #switch button {
+  animation: slide-in 0.4s forwards;
+}
+
+#switch button:hover{
+  outline: 8px solid var(--highlight-color);
+}
+
+#switch span {
+  display: block;
+  width: 64px;
+  height: 24px;
+  border: 1px solid var(--stroke-color);
+  background: var(--surface-color); 
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 9999px;
+}
+
+/* Links */
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 0;
+}
+
+ul li a {
+  display: flex;
+  padding: 16px 24px;
+  align-items: center;
+  justify-content: center; /*forma de alinhar elementos display flex, usando align-items center e justify-content center */
+  background: var(--surface-color);
+  border: 1px solid var(--stroke-color);
+  border-radius: 8px;
+  backdrop-filter: blur(4px)
+  -webkit-backdrop-filter blur(4px); /* --webkit-- serve para que um estilo css funcione em todos os navegadores */
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+/* sudo selector ou pseudo-selector. Aplicará estilo quando passar o mouse */
+ul li a:hover {
+  background: var(--surface-color-hover);
+  border: 1.5px solid var(--text-color);
+}
+
+#social-links {
+  display: flex;
+  padding: 24px 0;
+  font-size: 24px;
+  justify-content: center;
+}
+
+#social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  transition: background 0.2s;
+  border-radius: 50%;
+}
+
+#social-links a:hover {
+  background: var(--highlight-color);
+}
+
+footer {
+  padding: 24px 0;
+  text-align: center; /* forma de alinhar texto no centro utilizando o text-align center */
+  font-size: 14px;
+}
+
+/*  media queries */ 
+@media (min-width: 700px){
+    :root {
+      --bg-url: url(./assets/bg-desktop.jpg);
+    
+    }
+
+    .light {
+      --bg-url: url(./assets/bg-desktop-light.jpg);
+    }
+}
+
+/* animation */
+@keyframes slide-in {
+  from{
+    left: 0;
+  }
+  to {
+    left: 50%;
+  }
+}
+
+@keyframes slide-back {
+  from {
+    left: 50%;
+  }
+  to {
+    left: 0;
+  }
+}
